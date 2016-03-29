@@ -5,17 +5,7 @@ AngularJS demo using REST to Caché Document Data Model.
 Copy these files to your local machine.
 - Use the static files as-is :
 -- you will have to configure your webserver to accept CORS
--- for IIS, create a file web.config in you inetpub/wwwroot folder with following content:
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
- <system.webServer>
-   <httpProtocol>
-     <customHeaders>
-       <add name="Access-Control-Allow-Origin" value="*" />
-     </customHeaders>
-   </httpProtocol>
- </system.webServer>
-</configuration>
+-- for IIS, copy the file iis/web.config to your inetpub/wwwroot folder
 -- use URL http://localhost/.../superheroes
 
 - or Use the Caché built-in web server :
