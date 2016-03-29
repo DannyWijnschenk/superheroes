@@ -14,7 +14,7 @@ Copy these files to your local machine.
 
 Inital data is loaded from Marvel's Superheroes, a REST API is available from the http://developer.marvel.com website.
 - You need to create a developer account
-- get a private and public key, and paste it in the code (Import Tab)
+- get a private and public key, and paste it in the code (Import Tab, or in import.js)
 - set the Offset(Page) : 1 gives the first page of superhero characters
 - set the Limit : 100 will import the first 100 superhero characters
 - click on the import button : this will use REST to GET the data from Marvel, and PUT the data into Caché DocDM

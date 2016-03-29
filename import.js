@@ -12,42 +12,29 @@ importer.factory('restMarvelCharacters', function ($resource) {
 		});
  });
 
-importer.factory('restDocDBCollection', function ($resource) {
+importer.factory('restDocDMCollection', function ($resource) {
     return $resource(
-		HostURL() + "api/document/v1/SUMMIT2016/test", {}, {
-		update: { method: "POST",
+		HostURL() + "api/document/v1/:namespace/:collectionname", {collectionname: '@collectionname', namespace:'@namespace'}, {
+				query: { method: "POST",
+		         isArray: false,
+		         headers:{'accept':'application/json'} },
+                update: { method: "POST",
 		         isArray: false,
 		         headers:{'accept':'application/json'} }
 		});	
    });
 
-// Download a file form a url.
-function saveFile(url) {
-  // Get file name from url.
-  var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
-  var xhr = new XMLHttpRequest();
-  xhr.responseType = 'blob';
-  xhr.onload = function() {
-    var a = document.createElement('a');
-    a.href = window.URL.createObjectURL(xhr.response); // xhr.response is a blob
-    a.download = filename; // Set the file name.
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    delete a;
-  };
-  xhr.open('GET', url);
-  xhr.send();
-}
+importer.controller('ImportController', ['$scope', '$resource', '$routeParams', '$modal', 'restMarvelCharacters', 'restDocDMCollection',
+                                        function($scope,   $resource,   $routeParams,   $modal, restMarvelCharacters, restDocDMCollection) {
 
-
-importer.controller('ImportController', ['$scope', '$resource', '$routeParams', '$modal', 'restMarvelCharacters', 'restDocDBCollection',
-                                        function($scope,   $resource,   $routeParams,   $modal, restMarvelCharacters, restDocDBCollection) {
-
-  $scope.privateKey = '51e4873bff9cac515f618841fa3483282686dfc6';
+  $scope.privateKey = 'enter your private key here !!!';
   $scope.publicKey = '6e2cefb9ea64eb8adfd4554a23013b66';     
   $scope.api       = '';                                          
   console.log("importer ready"); 
+  var DocDM = { 
+                 "namespace"  : "USER",
+                 "collection" : "superheroes"
+              }
   $scope.limit = 100;
   $scope.offset = 1;
   
@@ -62,13 +49,11 @@ importer.controller('ImportController', ['$scope', '$resource', '$routeParams', 
     
   	temp = restMarvelCharacters.query({apikey:publicKey, hash:hash, ts:ts, offset:offset, limit:limit}, function(data) {
 	   $scope.response = temp.data.results;
-	   console.log(temp);
 	   $scope.images = [];
 	   for (var i=0; i < temp.data.results.length; i++) {
 	   	 $scope.images.push({'Url':temp.data.results[i].thumbnail.path+'.'+temp.data.results[i].thumbnail.extension});
-		 saveFile(temp.data.results[i].thumbnail.path+'.'+temp.data.results[i].thumbnail.extension);
-         temp2 = restDocDBCollection.update(temp.data.results[i], function(data) {
-			console.log(temp2);
+         temp2 = restDocDMCollection.update({namespace:DocDM.namespace,collectionname:DocDM.collection},temp.data.results[i], function(data) {
+			//
          });
 	   }
  	});
