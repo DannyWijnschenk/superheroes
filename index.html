@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Marvel Comics</title>
+  <link rel="stylesheet" type="text/css" href="nglib/bootstrap/css/bootstrapSuperhero.min.css" />
+  <link rel="stylesheet" type="text/css" href="superheroes.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+ 
+<body>
+  <div ng-app="MarvelApp">
+    <div ng-controller="MarvelController">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="">SuperHeroes</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#Characters">Characters<span class="sr-only">(current)</span></a></li>
+               <li><a href="#Import">Import</a></li>
+              <li><a href="#About">About</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <div class="container-fluid" >
+        <div class="row">
+          <div ng-view></div>
+        </div>
+      </div>
+    </div> <!--controller-->
+  </div> <!--mainapp-->	
+
+  <script type="text/javascript" src="nglib/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="nglib/angular.min.js"></script>
+  <script type="text/javascript" src="nglib/angular-route.min.js"></script>
+  <script type="text/javascript" src="nglib/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="nglib/angular-resource.min.js"></script>
+  <script type="text/javascript" src="nglib/angular-sanitize.min.js"></script>
+  <script type="text/javascript" src="nglib/ui-bootstrap-tpls-0.12.1.min.js"></script>
+  <script type="text/javascript" src="superheroes.js"></script>
+  <script type="text/javascript" src="characters.js"></script>
+  <script type="text/javascript" src="comics.js"></script>
+  <script type="text/javascript" src="about.js"></script>
+  <script type="text/javascript" src="import.js"></script>
+  <script type="text/javascript" src="md5.js"></script>
+</body>
+</html>

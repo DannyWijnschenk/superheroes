@@ -1,0 +1,38 @@
+    <div class="container">
+      <div ng-controller="CharactersController" id="controller" >
+	    <div class="well">
+	      <label>
+	        <input type="text" ng-model="criteria"></input>&nbsp;<span class="glyphicon glyphicon-search"></span>
+	      </label>
+	      <label class="pull-right">
+	      </label>
+	    </div>
+	    <table class="table table-hover">
+	      <thead>
+	        <th ng-click="sort('Name')">Name
+	          <i ng-class="{'glyphicon glyphicon-chevron-up': isSortUp('Name'), 'glyphicon glyphicon-chevron-down': isSortDown('Name')}"></i>
+	        </th>
+	        <th ng-click="sort('Description')">Description
+	          <i ng-class="{'glyphicon glyphicon-chevron-up': isSortUp('Description'), 'glyphicon glyphicon-chevron-down': isSortDown('Description')}"></i>
+	        </th>
+	        <th></th>
+            <th ng-click="showModalCharacter(null)">
+              <span class="glyphicon glyphicon-plus"></span>
+	        </th>
+	      </thead>
+	      <tr ng-repeat="character in filteredCharacters = (characters | filter:criteria | orderBy:sortField:reverse)">  
+	        <td class="col-md-3">{{character.content.name}}</td>
+	        <td class="col-md-5">{{character.content.description}}</td>
+	        <td class="col-md-3"><img ng-title="{{character.content.thumbnail.path}}.{{character.content.thumbnail.extension}}" ng-src="{{character.content.thumbnail.path}}.{{character.content.thumbnail.extension}}" width="150" height="100"/></td>
+            <td ng-click="showModalCharacter(character)">
+              <span class="glyphicon glyphicon-pencil"></span>
+	        </td>
+            <td ng-show="character.content.comics.available>0">
+              <a class="icon-link" ng-href="index.html#Comics/{{character._sourceID}}"> <span class="glyphicon glyphicon-file"></span> </a>
+	        </td>
+	      </tr>
+		</table>
+
+      </div> <!--controller-->
+    </div> <!--container-->
+

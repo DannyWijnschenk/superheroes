@@ -1,0 +1,22 @@
+<div class="container">
+    <div ng-controller="ComicsController" id="controller" >
+    <div class="well">
+	   <label>
+	       {{characterName}} : {{characterComics}} comics available.
+	   </label>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <th>Name</th>
+	        <th>Link</th>
+	      </thead>
+	      <tr ng-repeat="comic in comics">  
+	        <td class="col-md-3">{{comic.name}}</td>
+	        <td class="col-md-3">
+                {{comic.resourceURI}}</td>
+	      </tr>
+		</table>
+
+      </div> <!--controller-->
+    </div> <!--container-->
+    
